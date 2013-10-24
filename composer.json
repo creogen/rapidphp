@@ -1,0 +1,21 @@
+{
+    "name": "creogen/rapidphp",
+    "description": "RapidPHP Framework",
+    "type": "library",
+    "keywords": [
+        "framework",
+        "rapidphp"
+    ],
+    "homepage": "http://rapidphp.org/",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "phpunit/PHPUnit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Rapid\\": "src/"
+        }
+    }
+}
