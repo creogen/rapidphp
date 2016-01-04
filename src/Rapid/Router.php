@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 class Router
@@ -61,7 +59,7 @@ class Router
     protected function processCustomRoutes()
     {
         /**
-         * @var \Rapid\Router\RouteInterface $route
+         * @var \Rapid\Router\RouteInterface
          */
         foreach ($this->customRoutes as $route) {
             if ($route->pass($this->request)) {
@@ -86,8 +84,8 @@ class Router
         $paramsKey = '';
 
         foreach ($parts as $key => $part) {
-            if (!$controller && $this->application->hasModule($module . $part . '/')) {
-                $module .= $part . '/';
+            if (!$controller && $this->application->hasModule($module.$part.'/')) {
+                $module .= $part.'/';
                 continue;
             }
 

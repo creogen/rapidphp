@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 class Application
@@ -88,12 +86,14 @@ class Application
         $this->setModelPath('models/');
         $this->setViewPath('views/');
         $this->setLayoutPath('layouts/');
+
         return $this;
     }
 
     public function setControllerPath($path)
     {
-        $this->controllerDirectory = $this->applicationPath . $path;
+        $this->controllerDirectory = $this->applicationPath.$path;
+
         return $this;
     }
 
@@ -104,7 +104,8 @@ class Application
 
     public function setModelPath($path)
     {
-        $this->modelDirectory = $this->applicationPath . $path;
+        $this->modelDirectory = $this->applicationPath.$path;
+
         return $this;
     }
 
@@ -115,7 +116,8 @@ class Application
 
     public function setViewPath($path)
     {
-        $this->viewDirectory = $this->applicationPath . $path;
+        $this->viewDirectory = $this->applicationPath.$path;
+
         return $this;
     }
 
@@ -126,7 +128,7 @@ class Application
 
     public function setLayoutPath($path)
     {
-        $this->layoutDirectory = $this->viewDirectory . $path;
+        $this->layoutDirectory = $this->viewDirectory.$path;
     }
 
     public function layoutPath()
@@ -136,7 +138,7 @@ class Application
 
     protected function setBootstrap()
     {
-        $bootstrapPath = $this->applicationPath() . 'Bootstrap.php';
+        $bootstrapPath = $this->applicationPath().'Bootstrap.php';
         if (file_exists($bootstrapPath)) {
             include_once $bootstrapPath;
             $this->bootstrap = new \Bootstrap($this);
@@ -151,17 +153,19 @@ class Application
     public function addModule($module)
     {
         $this->modules[] = $module;
+
         return $this;
     }
 
     public function hasModule($module)
     {
-        $module = substr($module, -1) == '/' ? $module : $module . '/';
+        $module = substr($module, -1) == '/' ? $module : $module.'/';
         foreach ($this->modules() as $m) {
             if ($module == $m) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -191,6 +195,7 @@ class Application
         } else {
             $this->config = $config;
         }
+
         return $this;
     }
 
@@ -199,12 +204,14 @@ class Application
         if (!$this->config) {
             $this->config = new \Rapid\Config();
         }
+
         return $this->config;
     }
 
     public function clearConfig()
     {
         $this->config = null;
+
         return $this;
     }
 }

@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 class DataMapper
@@ -40,24 +38,28 @@ class DataMapper
     public function setModelClass($modelClass)
     {
         $this->modelClass = $modelClass;
+
         return $this;
     }
 
     public function setTablename($tablename)
     {
         $this->tablename = $tablename;
+
         return $this;
     }
 
     public function setDb(\Rapid\Db $db)
     {
         $this->db = $db;
+
         return $this;
     }
 
     public function setConnectionName($name)
     {
         $this->connectionName = $name;
+
         return $this;
     }
 
@@ -93,7 +95,8 @@ class DataMapper
             return $this->findById($params, $create);
         }
 
-        $params = (array)$params;
+        $params = (array) $params;
+
         return $this->fetchAll($params);
     }
 
@@ -103,9 +106,9 @@ class DataMapper
         $row = $this->db()->fetchRow($select, array('id' => $id));
 
         /**
-         * @var \Rapid\Model $model
+         * @var \Rapid\Model
          */
-        $model = new $this->modelClass;
+        $model = new $this->modelClass();
 
         if (!$row) {
             return $create ? $model : null;
@@ -130,8 +133,8 @@ class DataMapper
 
         $ret = array();
         foreach ($rows as $row) {
-            $m = new $this->modelClass;
-            /**
+            $m = new $this->modelClass();
+            /*
              * @var \Rapid\Model $m
              */
             $m->setProperties($row, true);

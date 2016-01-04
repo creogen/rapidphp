@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid\Db;
 
 class MySQL extends \Rapid\Db
@@ -34,7 +32,7 @@ class MySQL extends \Rapid\Db
 
     /**
      * @param string $tableName
-     * @param array $params
+     * @param array  $params
      *
      * @return int|void
      */
@@ -55,15 +53,14 @@ class MySQL extends \Rapid\Db
             implode(', ', $placeholders)
         );
         $this->executePreparedStatement($query, $params);
+
         return $this->driver->lastInsertId();
     }
 
     /**
      * @param string $tableName
-     * @param array $params
-     * @param array $where
-     *
-     * @return void
+     * @param array  $params
+     * @param array  $where
      */
     public function update($tableName, array $params, $where = array())
     {
@@ -88,9 +85,7 @@ class MySQL extends \Rapid\Db
 
     /**
      * @param string $tableName
-     * @param array $where
-     *
-     * @return void
+     * @param array  $where
      */
     public function delete($tableName, $where = array())
     {
@@ -119,7 +114,7 @@ class MySQL extends \Rapid\Db
             if (is_numeric($field)) {
                 $clauseStatements[] = $value;
             } else {
-                /**
+                /*
                  * @todo build query with IN () if $value is array
                  */
                 $clauseStatements[] = sprintf('`%s`=:%s',
@@ -127,13 +122,12 @@ class MySQL extends \Rapid\Db
                     $field
                 );
                 $params[$field] = $value;
-
             }
         }
         $clause .= implode(' AND ', $clauseStatements);
 
         return array(
-            $clause, $params
+            $clause, $params,
         );
     }
 

@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid\Form\Element;
 
 class Select extends \Rapid\Form\Element
@@ -40,6 +38,7 @@ class Select extends \Rapid\Form\Element
                 $title
             );
         }
+
         return implode('', $html);
     }
 }

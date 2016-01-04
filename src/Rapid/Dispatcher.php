@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 class Dispatcher
@@ -32,11 +30,11 @@ class Dispatcher
         $controllerName = $this->buildControllerName($requestController, $requestModule);
 
         if (!class_exists($controllerName)) {
-            throw new \Rapid\Dispatcher\Exception('Controller not found: ' . $controllerName);
+            throw new \Rapid\Dispatcher\Exception('Controller not found: '.$controllerName);
         }
 
         /**
-         * @var \Rapid\Controller $controller
+         * @var \Rapid\Controller
          */
         $controller = new $controllerName($this, $this->request);
 
@@ -56,7 +54,7 @@ class Dispatcher
         if ($controller->useLayout()) {
             $layout = new \Rapid\View();
             $layout->setFile($this->layoutFile($controller->layout()));
-            $layout->setVariables((array)$controller->layoutVariables());
+            $layout->setVariables((array) $controller->layoutVariables());
             $layout->setVariable('content', $output);
             $output = $layout->render();
         }
@@ -90,12 +88,12 @@ class Dispatcher
 
         $namespaces = $this->moduleToNamespaces($module);
 
-        return '\\Controllers\\' . $namespaces . $controllerName;
+        return '\\Controllers\\'.$namespaces.$controllerName;
     }
 
     protected function processControllerName($controller)
     {
-        return $this->processUriName($controller) . 'Controller';
+        return $this->processUriName($controller).'Controller';
     }
 
     protected function moduleToNamespaces($module)
@@ -119,12 +117,12 @@ class Dispatcher
                     )
                 )
             )
-        ) . '\\';
+        ).'\\';
     }
 
     protected function processActionName($action)
     {
-        return $this->processUriName($action) . 'Action';
+        return $this->processUriName($action).'Action';
     }
 
     protected function processUriName($name)
@@ -135,6 +133,7 @@ class Dispatcher
                 preg_split('/[_-]+/', $name)
             )
         );
+
         return $name;
     }
 
@@ -144,7 +143,7 @@ class Dispatcher
             return true;
         }
 
-        throw new \Rapid\Dispatcher\Exception("Module not found");
+        throw new \Rapid\Dispatcher\Exception('Module not found');
     }
 
     protected function viewFile($module, $controller, $action)
@@ -155,16 +154,18 @@ class Dispatcher
         }
         $controller = str_replace('-', '_', $controller);
         $action = str_replace('-', '_', $action);
-        return $this->application->viewPath() .
-            $module . DIRECTORY_SEPARATOR .
-            $controller . DIRECTORY_SEPARATOR .
-            $action . '.phtml';
+
+        return $this->application->viewPath().
+            $module.DIRECTORY_SEPARATOR.
+            $controller.DIRECTORY_SEPARATOR.
+            $action.'.phtml';
     }
 
     protected function layoutFile($name)
     {
         $layoutsPath = $this->application->layoutPath();
-        $name = strpos($name, '.phtml') === false ? $name . '.phtml' : $name;
-        return $layoutsPath . $name;
+        $name = strpos($name, '.phtml') === false ? $name.'.phtml' : $name;
+
+        return $layoutsPath.$name;
     }
 }

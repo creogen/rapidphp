@@ -1,20 +1,15 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 /**
- * Class Loader
+ * Class Loader.
  *
  * Original parts from zf2 standard autoloader
- *
- * @package Rapid
  */
-
 class Loader
 {
     const NAMESPACE_SEPARATOR = '\\';
@@ -24,17 +19,18 @@ class Loader
 
     public function registerNamespace($namespace, $path)
     {
-        $namespace = rtrim($namespace, self::NAMESPACE_SEPARATOR) . self::NAMESPACE_SEPARATOR;
+        $namespace = rtrim($namespace, self::NAMESPACE_SEPARATOR).self::NAMESPACE_SEPARATOR;
         $this->namespaces[$namespace] = $this->normalizePath($path);
+
         return $this;
     }
 
     /**
-     * Defined by Autoloadable; autoload a class
+     * Defined by Autoloadable; autoload a class.
      *
-     * @param  string $class
+     * @param string $class
      *
-     * @return boolean|string
+     * @return bool|string
      */
     public function autoload($class)
     {
@@ -42,15 +38,15 @@ class Loader
             if ($this->loadClass($class)) {
                 return $class;
             }
+
             return false;
         }
+
         return false;
     }
 
     /**
-     * Register the autoloader with spl_autoload
-     *
-     * @return void
+     * Register the autoloader with spl_autoload.
      */
     public function register()
     {
@@ -58,7 +54,7 @@ class Loader
     }
 
     /**
-     * Load class
+     * Load class.
      *
      * @param string $class
      *
@@ -77,17 +73,19 @@ class Loader
                 if (file_exists($filename)) {
                     return include $filename;
                 }
+
                 return false;
             }
         }
+
         return false;
     }
 
     /**
-     * Transform the class name to a filename
+     * Transform the class name to a filename.
      *
-     * @param  string $class
-     * @param  string $directory
+     * @param string $class
+     * @param string $directory
      *
      * @return string
      */
@@ -98,13 +96,13 @@ class Loader
         $matches = array();
         preg_match('/(?P<namespace>.+\\\)?(?P<class>[^\\\]+$)/', $class, $matches);
 
-        $class     = (isset($matches['class'])) ? $matches['class'] : '';
+        $class = (isset($matches['class'])) ? $matches['class'] : '';
         $namespace = (isset($matches['namespace'])) ? $matches['namespace'] : '';
 
         return $directory
-            . str_replace(self::NAMESPACE_SEPARATOR, '/', $namespace)
-            . str_replace(self::PREFIX_SEPARATOR, '/', $class)
-            . '.php';
+            .str_replace(self::NAMESPACE_SEPARATOR, '/', $namespace)
+            .str_replace(self::PREFIX_SEPARATOR, '/', $class)
+            .'.php';
     }
 
     protected function normalizePath($path)
@@ -112,9 +110,11 @@ class Loader
         $last = $path[strlen($path) - 1];
         if (in_array($last, array('/', '\\'))) {
             $path[strlen($path) - 1] = DIRECTORY_SEPARATOR;
+
             return $path;
         }
         $path .= DIRECTORY_SEPARATOR;
+
         return $path;
     }
 }

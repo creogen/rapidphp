@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 use Rapid\Request\Container;
@@ -53,7 +51,7 @@ class Request
     }
 
     /**
-     * Returns request uri without first forward slash
+     * Returns request uri without first forward slash.
      *
      * @return string
      */
@@ -92,6 +90,7 @@ class Request
             return '';
         }
         list($path, $query) = $this->pathAndQuery();
+
         return $query;
     }
 
@@ -110,7 +109,7 @@ class Request
 
     /**
      * @param string $uri This is optional, but we should use this param inside uri() method,
-     * otherwise we will get infinite loop
+     *                    otherwise we will get infinite loop
      *
      * @return bool
      */
@@ -163,18 +162,21 @@ class Request
     public function setModule($module)
     {
         $this->module = $module;
+
         return $this;
     }
 
     public function setController($controller)
     {
         $this->controller = $controller;
+
         return $this;
     }
 
     public function setAction($action)
     {
         $this->action = $action;
+
         return $this;
     }
 

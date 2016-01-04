@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 class Controller
@@ -44,6 +42,7 @@ class Controller
     public function setView(\Rapid\View $view)
     {
         $this->view = $view;
+
         return $this;
     }
 
@@ -54,27 +53,25 @@ class Controller
 
     public function preDispatch()
     {
-
     }
 
     public function init()
     {
-
     }
 
     public function process($action)
     {
         $this->init();
-        $variables = (array)$this->$action();
+        $variables = (array) $this->$action();
         if ($this->view) {
             $this->view->setVariables($variables);
+
             return $this->view->render();
         }
     }
 
     public function postDispatch()
     {
-
     }
 
     public function name()
@@ -87,6 +84,7 @@ class Controller
         }
         $name = preg_replace('/[A-Z]/', '_$0', $matches[1]);
         $name = strtolower(substr($name, 1));
+
         return $name;
     }
 
@@ -94,6 +92,7 @@ class Controller
     {
         $parts = explode('\\', get_class($this));
         $fullClassName = $parts[count($parts) - 1];
+
         return $fullClassName;
     }
 
@@ -105,6 +104,7 @@ class Controller
     public function setLayout($layout)
     {
         $this->layout = $layout;
+
         return $this;
     }
 
@@ -116,6 +116,7 @@ class Controller
     public function setLayoutVariable($name, $value)
     {
         $this->layoutVariables[$name] = $value;
+
         return $this;
     }
 

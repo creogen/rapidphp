@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 abstract class Db
@@ -17,7 +15,7 @@ abstract class Db
 
     /**
      * @param string|array $options
-     * @param string $instanceName
+     * @param string       $instanceName
      *
      * @return \Rapid\Db
      */
@@ -55,6 +53,7 @@ abstract class Db
     public static function get($instanceName = '')
     {
         $instanceName = $instanceName ? $instanceName : 'default';
+
         return isset(self::$instances[$instanceName])
             ? self::$instances[$instanceName]
             : null;
@@ -86,6 +85,7 @@ abstract class Db
             list($optionName, $optionValue) = explode('=', $keyValueString);
             $ret[$optionName] = $optionValue;
         }
+
         return $ret;
     }
 
@@ -119,14 +119,14 @@ abstract class Db
     }
 
     /**
-     * Return DSN for given database driver
+     * Return DSN for given database driver.
      *
      * @return string
      */
     abstract protected function dsn();
 
     /**
-     * Run query and return number of affected rows
+     * Run query and return number of affected rows.
      *
      * @param $query
      * @param array $params
@@ -137,6 +137,7 @@ abstract class Db
     {
         if (count($params)) {
             $stmt = $this->executePreparedStatement($query, $params);
+
             return $stmt->rowCount();
         }
 
@@ -144,7 +145,7 @@ abstract class Db
     }
 
     /**
-     * Executes query and returns associated array with all result rows
+     * Executes query and returns associated array with all result rows.
      *
      * @param $query
      * @param array $params
@@ -154,11 +155,12 @@ abstract class Db
     public function fetchAll($query, $params = array())
     {
         $stmt = $this->executePreparedStatement($query, $params);
+
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     /**
-     * Executes query and returns associated array with result row
+     * Executes query and returns associated array with result row.
      *
      * @param $query
      * @param array $params
@@ -168,15 +170,16 @@ abstract class Db
     public function fetchRow($query, $params = array())
     {
         $stmt = $this->executePreparedStatement($query, $params);
+
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     /**
-     * Executes query and returns array with single column
+     * Executes query and returns array with single column.
      *
      * @param $query
      * @param array $params
-     * @param int $column
+     * @param int   $column
      *
      * @return mixed
      */
@@ -186,19 +189,20 @@ abstract class Db
         $columnCount = $stmt->columnCount();
 
         if (!$columnCount) {
-            return null;
+            return;
         }
 
-        $column = $column >= 0 && $column <= $columnCount - 1 ? (int)$column : 0;
+        $column = $column >= 0 && $column <= $columnCount - 1 ? (int) $column : 0;
         $ret = array();
         while (($value = $stmt->fetchColumn($column)) !== false) {
             $ret[] = $value;
         }
+
         return $ret;
     }
 
     /**
-     * Executes query and returns value
+     * Executes query and returns value.
      *
      * @param $query
      * @param array $params
@@ -209,14 +213,16 @@ abstract class Db
     {
         $stmt = $this->executePreparedStatement($query, $params);
         $value = $stmt->fetchColumn();
+
         return $value;
     }
 
     /**
      * @param string $query
-     * @param array $params
+     * @param array  $params
      *
      * @return \PDOStatement
+     *
      * @throws Db\Exception
      */
     protected function executePreparedStatement($query, $params)
@@ -224,9 +230,10 @@ abstract class Db
         $stmt = $this->driver->prepare($query);
         if (!$stmt->execute($params)) {
             throw new \Rapid\Db\Exception(
-                'Error execution query: ' . implode(PHP_EOL, $stmt->errorInfo())
+                'Error execution query: '.implode(PHP_EOL, $stmt->errorInfo())
             );
         }
+
         return $stmt;
     }
 
@@ -240,8 +247,8 @@ abstract class Db
 
     /**
      * @param string $tableName
-     * @param array $params
-     * @param array $where
+     * @param array  $params
+     * @param array  $where
      *
      * @return mixed
      */
@@ -249,7 +256,7 @@ abstract class Db
 
     /**
      * @param string $tableName
-     * @param array $where
+     * @param array  $where
      *
      * @return mixed
      */

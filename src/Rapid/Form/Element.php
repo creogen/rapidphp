@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid\Form;
 
 abstract class Element
@@ -23,6 +21,7 @@ abstract class Element
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -38,6 +37,7 @@ abstract class Element
         } else {
             $this->attributes[$name] = $value;
         }
+
         return $this;
     }
 
@@ -48,12 +48,14 @@ abstract class Element
             $value = strtr($value, '"', '\"');
             $pairs[] = sprintf('%s="%s"', $name, $value);
         }
+
         return implode(' ', $pairs);
     }
 
     public function setLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -87,12 +89,14 @@ abstract class Element
     public function setErrors(array $messages)
     {
         $this->errors = $messages;
+
         return $this;
     }
 
     public function addError($message)
     {
         $this->errors[] = $message;
+
         return $this;
     }
 
@@ -104,12 +108,14 @@ abstract class Element
     public function setValidators(array $validators)
     {
         $this->validators = $validators;
+
         return $this;
     }
 
     public function addValidator(\Rapid\Form\Validator $validator)
     {
         $this->validators[] = $validator;
+
         return $this;
     }
 

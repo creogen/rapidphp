@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid\Router;
 
 class Route implements \Rapid\Router\RouteInterface
@@ -52,6 +50,7 @@ class Route implements \Rapid\Router\RouteInterface
 
         $this->fillInValues($matches);
         $this->setRequestValues($request);
+
         return true;
     }
 
@@ -60,7 +59,7 @@ class Route implements \Rapid\Router\RouteInterface
         preg_match_all('#:(\w+)#', $rule, $matches);
 
         $placeholderCount = count($matches[0]);
-        for ($i = 0; $i < $placeholderCount; $i++) {
+        for ($i = 0; $i < $placeholderCount; ++$i) {
             $placeholder = $matches[0][$i];
             $paramName = $matches[1][$i];
 
@@ -107,9 +106,10 @@ class Route implements \Rapid\Router\RouteInterface
         $module = $this->defaultModule;
         if ($key = array_search('module', $this->params)) {
             $module = !empty($this->values[$key])
-                ? $this->values[$key] . '/'
+                ? $this->values[$key].'/'
                 : $module;
         }
+
         return $module;
     }
 
@@ -121,6 +121,7 @@ class Route implements \Rapid\Router\RouteInterface
                 ? $this->values[$key]
                 : $controller;
         }
+
         return $controller;
     }
 
@@ -132,6 +133,7 @@ class Route implements \Rapid\Router\RouteInterface
                 ? $this->values[$key]
                 : $action;
         }
+
         return $action;
     }
 
@@ -149,6 +151,7 @@ class Route implements \Rapid\Router\RouteInterface
 
             $ret[$name] = $this->values[$key];
         }
+
         return $ret;
     }
 }

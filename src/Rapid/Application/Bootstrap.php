@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid\Application;
 
 class Bootstrap
@@ -55,6 +53,7 @@ class Bootstrap
     public function bootstrap()
     {
         $this->bootstrapMethods();
+
         return $this;
     }
 

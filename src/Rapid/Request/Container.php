@@ -1,4 +1,5 @@
 <?php
+
 namespace Rapid\Request;
 
 class Container implements \ArrayAccess
@@ -15,6 +16,7 @@ class Container implements \ArrayAccess
         if (isset($this->container[$key])) {
             return $this->container[$key];
         }
+
         return $default;
     }
 
@@ -22,7 +24,6 @@ class Container implements \ArrayAccess
     {
         return isset($this->container[$offset]);
     }
-
 
     public function offsetGet($offset)
     {

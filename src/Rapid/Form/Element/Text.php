@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid\Form\Element;
 
 class Text extends \Rapid\Form\Element
@@ -22,6 +20,4 @@ class Text extends \Rapid\Form\Element
             htmlspecialchars($this->value(), ENT_QUOTES)
         );
     }
-
-
 }

@@ -1,15 +1,12 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
-
 /**
- * Read-only config
+ * Read-only config.
  */
 class Config
 {
@@ -53,14 +50,14 @@ class Config
     public function get($key)
     {
         if (!isset($this->options[$key])) {
-            return null;
+            return;
         }
 
         if (!is_array($this->options[$key])) {
             return $this->options[$key];
         }
 
-        return new Config($this->options[$key]);
+        return new self($this->options[$key]);
     }
 
     public function __get($key)

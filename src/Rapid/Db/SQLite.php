@@ -1,18 +1,12 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid\Db;
 
 /**
- * Class SQLite
- *
- * @package Rapid\Db
- *
- * Important: I'm not SQLite developer, so this class is just example
+ * Class SQLite.
  */
 class SQLite extends \Rapid\Db
 {
@@ -31,7 +25,7 @@ class SQLite extends \Rapid\Db
 
     /**
      * @param string $tableName
-     * @param array $params
+     * @param array  $params
      *
      * @return int|void
      */
@@ -46,15 +40,14 @@ class SQLite extends \Rapid\Db
         }
         $query = sprintf($query, $tableName, implode(', ', $fields), implode(', ', $placeholders));
         $this->executePreparedStatement($query, $params);
+
         return $this->driver->lastInsertId();
     }
 
     /**
      * @param string $tableName
-     * @param array $params
-     * @param array $where
-     *
-     * @return void
+     * @param array  $params
+     * @param array  $where
      */
     public function update($tableName, array $params, $where = array())
     {
@@ -76,9 +69,7 @@ class SQLite extends \Rapid\Db
 
     /**
      * @param string $tableName
-     * @param array $where
-     *
-     * @return void
+     * @param array  $where
      */
     public function delete($tableName, $where = array())
     {
@@ -107,18 +98,17 @@ class SQLite extends \Rapid\Db
             if (is_numeric($field)) {
                 $clauseStatements[] = $value;
             } else {
-                /**
+                /*
                  * @todo build query with IN () if $value is array
                  */
                 $clauseStatements[] = sprintf('%s=:%s', $field, $field);
                 $params[$field] = $value;
-
             }
         }
         $clause .= implode(' AND ', $clauseStatements);
 
         return array(
-            $clause, $params
+            $clause, $params,
         );
     }
 }

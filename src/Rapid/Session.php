@@ -1,15 +1,13 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 class Session
 {
-    static public function init($sessionName = null)
+    public static function init($sessionName = null)
     {
         self::name($sessionName);
         self::start();
@@ -19,17 +17,17 @@ class Session
     /**
      * @param string $name
      */
-    static public function name($name = null)
+    public static function name($name = null)
     {
         session_name($name);
     }
 
-    static public function start()
+    public static function start()
     {
         session_start();
     }
 
-    static public function regenerateId()
+    public static function regenerateId()
     {
         session_regenerate_id();
     }
@@ -37,7 +35,7 @@ class Session
     /**
      * @return string
      */
-    static public function sessionId()
+    public static function sessionId()
     {
         return session_id();
     }

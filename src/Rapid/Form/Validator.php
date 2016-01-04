@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid\Form;
 
 abstract class Validator
@@ -41,6 +39,7 @@ abstract class Validator
         if (!isset($data[$this->model->name()][$this->elementName])) {
             throw new \Rapid\Form\Validator\Exception\DoesntExist();
         }
+
         return $data[$this->model->name()][$this->elementName];
     }
 
@@ -49,6 +48,7 @@ abstract class Validator
         if (!isset($data[$this->elementName])) {
             throw new \Rapid\Form\Validator\Exception\DoesntExist();
         }
+
         return $data[$this->elementName];
     }
 

@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 class Model
@@ -35,13 +33,14 @@ class Model
     public function setId($value)
     {
         $this->_params['id'] = $value;
+
         return $this;
     }
 
     /**
      * @param string $name
-     * @param mixed $value
-     * @param bool $init Mark field as modified if false
+     * @param mixed  $value
+     * @param bool   $init  Mark field as modified if false
      *
      * @return \Rapid\Model
      */
@@ -58,9 +57,7 @@ class Model
 
     /**
      * @param string $name
-     * @param mixed $value
-     *
-     * @return void
+     * @param mixed  $value
      */
     public function __set($name, $value)
     {
@@ -76,6 +73,7 @@ class Model
     {
         $val = isset($this->_params[$name]) ?
             $this->_params[$name] : null;
+
         return $val;
     }
 
@@ -113,7 +111,7 @@ class Model
 
     /**
      * @param array $data
-     * @param bool $init Mark fields as modified if false
+     * @param bool  $init Mark fields as modified if false
      *
      * @return \Rapid\Model
      */
@@ -130,6 +128,7 @@ class Model
     {
         $name = preg_replace('/[A-Z]/', '_$0', $this->fullName());
         $name = strtolower(substr($name, 1));
+
         return $name;
     }
 
@@ -137,6 +136,7 @@ class Model
     {
         $parts = explode('\\', get_class($this));
         $fullClassName = $parts[count($parts) - 1];
+
         return $fullClassName;
     }
 }

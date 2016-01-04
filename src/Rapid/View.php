@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package Rapid
  * @author Dmitry Merkushin <merkushin@gmail.com>
  */
-
 namespace Rapid;
 
 class View
@@ -20,7 +18,7 @@ class View
     protected $variables = array();
 
     /**
-     * Set view file
+     * Set view file.
      *
      * @param $path
      *
@@ -29,11 +27,12 @@ class View
     public function setFile($path)
     {
         $this->file = $path;
+
         return $this;
     }
 
     /**
-     * Return view file path
+     * Return view file path.
      *
      * @return string
      */
@@ -47,12 +46,14 @@ class View
         foreach ($vars as $name => $value) {
             $this->setVariable($name, $value);
         }
+
         return $this;
     }
 
     public function setVariable($name, $value)
     {
         $this->variables[$name] = $value;
+
         return $this;
     }
 
@@ -82,10 +83,11 @@ class View
     {
         ob_start();
         if (!file_exists($this->file)) {
-            throw new \Rapid\View\Exception("View file not found");
+            throw new \Rapid\View\Exception('View file not found');
         }
         extract($this->variables);
         include $this->file;
+
         return ob_get_clean();
     }
 
